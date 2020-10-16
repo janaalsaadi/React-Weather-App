@@ -7,8 +7,8 @@ class WeatherForecast extends Component{
       
       
     return (
-      <div className="weather-forecast-wrapper">
-        <Dashboard city="jenin" />
+      <div>
+        <Dashboard city={this.props.city} />
         <ForecastTiles forecasts={this.props.list} />
       </div>
     );
