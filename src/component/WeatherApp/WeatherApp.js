@@ -1,17 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import WeatherForecast from './WeatherForecast';
+import WeatherForecast from '../WeatherForecast/WeatherForecast';
 import {connect} from 'react-redux';
-import * as actions from "../store/actions/index";
+import * as actions from "../../store/actions/index";
 
- class MyApp extends React.Component {
+ class WeatherApp extends React.Component {
  
-
-  state={
-    data:[],
-    city:[],
-    list:[]
-  }
 
   componentDidMount(){
     this.props.onFetchWeather();
@@ -47,5 +40,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps , mapDispatchToProps) (MyApp);
+export default connect(mapStateToProps , mapDispatchToProps) (WeatherApp);
 

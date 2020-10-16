@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ForecastTiles from "./ForecastTiles";
-import Dashboard from "./Dashboard";
+import WeatherData from "../WeatherData/WeatherData";
+import Header from "../Header/Header";
 
 class WeatherForecast extends Component{
     render(){
@@ -8,8 +8,8 @@ class WeatherForecast extends Component{
       
     return (
       <div>
-        <Dashboard city={this.props.city} />
-        <ForecastTiles forecasts={this.props.list} />
+        <Header city={this.props.city} />
+        <WeatherData forecasts={this.props.list} />
       </div>
     );
 };

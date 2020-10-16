@@ -1,13 +1,14 @@
 import React from 'react';
-import MyApp from './component/MyApp';
+import WeatherApp from './component/WeatherApp/WeatherApp';
+import classes from './App.module.css';
  class App extends React.Component {
  
 
   render () {
 
     return (
-      <div>
-      <MyApp/>
+      <div className={classes.main}>
+      <WeatherApp/>
       </div>
     )
   }

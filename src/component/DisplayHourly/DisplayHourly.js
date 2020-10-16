@@ -1,7 +1,8 @@
 
 import React from "react";
 import {Line} from 'react-chartjs-2';
-class DetailedInfo extends React.Component{
+
+class DisplayHourly extends React.Component{
 
 
     state ={
@@ -22,7 +23,8 @@ class DetailedInfo extends React.Component{
    }
 
    setHours = (hour) => {
-         this.state.hours.push(hour)
+          let myHour = hour >12 ? Number.parseInt(hour)-12+' PM' :  hour+' AM';
+         this.state.hours.push(myHour)
    } 
 
    setTemp = (temp) => {
@@ -31,21 +33,24 @@ class DetailedInfo extends React.Component{
 
 render(){
   const info = {
+    
     labels: this.state.hours,
     datasets: [
       {
         label: 'Hourly forcast',
-        fill: false,
+        fill: true,
         lineTension: 0.5,
-        backgroundColor: 'rgba(75,192,192,1)',
+        color:'white',
+        backgroundImage:'linear-gradient(to right, DarkOrchid, DarkTurquoise)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: this.state.temp
+        data: this.state.temp,
+      
       }
     ]
   }
   return (
-    <div className="hourly">
+    <div>
       {this.props.data.map((item, i) => (
           
           this.hourlyWeather(Number.parseInt(item.main.temp)-275 , item.dt_txt.substring(11,13)),
@@ -56,17 +61,17 @@ render(){
       
       <div>
       <Line
-      
+          
           data={info}
           options={{
             title:{
               display:true,
-            //  text:'Hourly forcast',
+             text:'Hourly Forecast',
               fontSize:20
             },
             legend:{
-              display:true,
-              position:'right'
+              display:false,
+
             }
           }}
         />
@@ -77,4 +82,4 @@ render(){
 };
 }
 
-export default DetailedInfo;
+export default DisplayHourly;
