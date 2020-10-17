@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import classes from './Header.module.css';
+import * as actions from '../../store/actions/index';
 
-export default class Header extends Component {
+
+ class Header extends Component {
+  componentDidMount(){
+    this.props.onFetchWeather()
+  }
   render() {
     return (
       <div className={classes.myHeader}>
@@ -53,8 +59,24 @@ export default class Header extends Component {
           </div>
 
         </header>
-    <span> {this.props.city}</span>
+    <span> {this.props.city.name}</span>
       </div>
     );
   }
 }
+
+
+const mapStateToProps = state => {
+  return {
+    city:state.city
+   
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchWeather: () => dispatch(actions.fetchWeatherData())
+  };
+};
+
+export default connect(mapStateToProps , mapDispatchToProps) (Header);
+

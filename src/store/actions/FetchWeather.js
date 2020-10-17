@@ -32,7 +32,7 @@ export const fetchWeatherData  = () => async dispatch => {
         var myLongitude = parseFloat(position.coords.longitude);
  
     dispatch(fetchWeatherStart());
-  const url=  `http://api.openweathermap.org/data/2.5/forecast?lat=${myLatitude}&lon=${myLongitude}&cnt=120&appid=7fcada73c4286410650cc2658ab8e327`;
+  const url=  `https://api.openweathermap.org/data/2.5/forecast?lat=${myLatitude}&lon=${myLongitude}&cnt=120&appid=7fcada73c4286410650cc2658ab8e327`;
     axios
       .get(url)
       .then(res => {

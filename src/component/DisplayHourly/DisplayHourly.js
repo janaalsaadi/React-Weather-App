@@ -61,7 +61,6 @@ render(){
       
       <div>
       <Line
-          
           data={info}
           options={{
             title:{

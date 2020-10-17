@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import DisplayDaily from '../DisplayDaily/DisplayDaily';
 import classes from './weatherData.module.css';
+import * as actions from '../../store/actions/index';
+import { connect } from "react-redux";
 
-export default class weatherData extends Component {
-
-  // Filters the data by date and returns an Object containing a list of 5-day forecast.
+ class weatherData extends Component {
+componentDidMount(){
+  this.props.onFetchWeather();
+}
   _groupByDays = data => {
     return (data.reduce((list, item) => {
       const forecastDate = item.dt_txt.substr(0,10);
@@ -35,15 +38,14 @@ export default class weatherData extends Component {
       max: Math.round(Math.max(...max)),
     };
 
-    // Gets the day's average humdity
     const avgHumdity = Math.round(humidity.reduce((curr, next) => curr + next) / humidity.length);
 
     return (
-      <div className="weather-info">
-        <div className="min-max">
+      <div>
+        <div >
           <strong>{`${Number.parseInt(minMax.max) -275}°C`}</strong> / {`${Number.parseInt(minMax.min) - 275}°C`}
         </div>
-        <div className="more-info">
+        <div >
           {`Avg. Humidity: ${avgHumdity}%`}
         </div>
       </div>
@@ -53,8 +55,7 @@ export default class weatherData extends Component {
 
   render() {
 
-    const { forecasts } = this.props;
-    const tiles = Object.values(this._groupByDays(forecasts));
+    const tiles = Object.values(this._groupByDays(this.props.list));
 
 
     const forecastTiles = tiles.length > 5 ? tiles.slice(0, 5) : tiles;
@@ -77,3 +78,16 @@ export default class weatherData extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    list :state.list
+   
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchWeather: () => dispatch(actions.fetchWeatherData())
+  };
+};
+
+export default connect(mapStateToProps , mapDispatchToProps)(weatherData);
